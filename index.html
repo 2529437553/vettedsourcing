@@ -140,8 +140,12 @@
   </p>
 
   <!-- ⚠️ Replace REPLACE_WITH_FORM_ID with a real Formspree form id before deploying -->
-  <form class="capture" id="waitlist" action="https://formspree.io/f/REPLACE_WITH_FORM_ID" method="POST">
+  <form class="capture" id="waitlist" action="#" method="POST">
     <input type="email" name="email" placeholder="you@yourstore.com" required aria-label="Email address">
+    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <input type="hidden" name="_subject" value="New VettedSourcing waitlist signup">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
     <button type="submit">Get early access</button>
   </form>
   <p class="form-note">Be first to see the 20 launch profiles + the red-flag database. No spam.</p>
@@ -241,13 +245,17 @@
 </footer>
 
 <script>
-  // Progressive enhancement: stay on page after submit
+  // Progressive enhancement: stay on page after submit.
+  // Inbox address assembled at runtime so static-HTML scrapers can't harvest it.
   const form = document.getElementById("waitlist");
+  const box = ["2529437553", "wuting"].join("") + "@" + ["gmail", "com"].join(".");
+  const endpoint = "https://formsubmit.co/ajax/" + box;
+  form.action = "https://formsubmit.co/" + box;
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const data = new FormData(form);
     try {
-      const res = await fetch(form.action, {
+      const res = await fetch(endpoint, {
         method: "POST",
         body: data,
         headers: { Accept: "application/json" },
