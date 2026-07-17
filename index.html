@@ -117,6 +117,33 @@
   .card h3 { font-size: 17px; font-weight: 600; letter-spacing: -0.3px; margin-bottom: 8px; color: var(--navy); }
   .card p { font-size: 14px; color: var(--muted); }
 
+  /* Report offer */
+  .offer {
+    background: var(--canvas); border: 1px solid var(--border); border-radius: 12px;
+    padding: 40px 32px; max-width: 720px; margin: 0 auto;
+    box-shadow: 0 1px 3px rgba(13,37,61,.06);
+  }
+  .offer h3 { font-size: 22px; font-weight: 600; letter-spacing: -0.4px; color: var(--navy); margin-bottom: 12px; }
+  .offer .founding {
+    font-size: 13px; color: var(--primary-deep); background: #efedff;
+    padding: 3px 10px; border-radius: 999px; font-weight: 500; vertical-align: middle;
+  }
+  .offer > p { font-size: 15px; color: var(--muted); margin-bottom: 12px; }
+  .offer ul { margin: 0 0 16px 20px; }
+  .offer li { font-size: 14px; color: var(--ink); margin-bottom: 8px; }
+  .offer .pay-note { font-size: 15px; color: var(--ink); }
+  .offer .pay-note b { color: var(--success); }
+  .cta-line { display: flex; gap: 12px; flex-wrap: wrap; margin: 20px 0 16px; }
+  .btn {
+    display: inline-block; height: 44px; line-height: 44px; padding: 0 24px;
+    font-size: 15px; font-weight: 500; color: #fff; background: var(--primary);
+    border-radius: 999px; text-decoration: none; transition: background 150ms ease-out;
+  }
+  .btn:hover { background: var(--primary-deep); }
+  .btn.ghost { color: var(--primary-deep); background: #efedff; }
+  .btn.ghost:hover { background: #e3dfff; }
+  .fine { font-size: 13px; color: var(--muted); }
+
   footer {
     padding: 48px 24px; text-align: center; font-size: 13px; color: var(--muted);
     border-top: 1px solid var(--border);
@@ -227,6 +254,30 @@
   </div>
 </section>
 
+<section id="report">
+  <div class="wrap">
+    <p class="eyebrow">Available now</p>
+    <h2>Already talking to an agent? Get them vetted first.</h2>
+    <div class="offer">
+      <h3>Provider Vetting Report — $49 <span class="founding">founding price</span></h3>
+      <p>Name any China sourcing, fulfillment or QC company. Within 5 business days you get the full workup we run for directory profiles:</p>
+      <ul>
+        <li><b>Business-registration deep-dive</b> in official Chinese records — company age, registered capital, legal status, insured headcount vs. the team they claim</li>
+        <li><b>US customs shipment history</b> — does their real export volume match their marketing?</li>
+        <li><b>Mystery-inquiry test</b> — response speed, the fee structure they quote a real buyer, payment red flags</li>
+        <li><b>Review cross-check</b> including complaints, with every claim labeled by evidence level</li>
+        <li><b>The exact questions to ask</b> — and red lines to draw — before wiring money</li>
+      </ul>
+      <p class="pay-note"><b>Pay after delivery.</b> You only pay once the report is in your inbox and you've read it. No useful report, no payment.</p>
+      <div class="cta-line">
+        <a class="btn" href="sample-report.html">See a real sample report</a>
+        <a class="btn ghost" id="report-request" href="sample-report.html">Request a report</a>
+      </div>
+      <p class="fine">We only verify — we never sell sourcing or inspection ourselves (see pledge below). Reports state facts and evidence levels; they don't guarantee any commercial outcome.</p>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="wrap">
     <div class="pledge">
@@ -274,6 +325,11 @@
       form.submit();
     }
   });
+
+  // Report-request address assembled at runtime (same anti-scraper reasoning as above).
+  const rbox = ["alexm", "retailco"].join(".") + "@" + ["outlook", "com"].join(".");
+  const rlink = document.getElementById("report-request");
+  if (rlink) rlink.href = "mailto:" + rbox + "?subject=" + encodeURIComponent("Vetting report request — [agent name]");
 </script>
 
 </body>
